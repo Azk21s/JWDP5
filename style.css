@@ -84,9 +84,11 @@ form {
 }
 
 /* -- FOOTER -- */
-
+.footer {
+    position: relative;
+}
 footer {
-    display: inline-block;
+    display: flex;
     position: absolute;
     text-align: center;
     padding: 0 0 0 1.5rem;
