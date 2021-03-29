@@ -31,6 +31,30 @@ form {
     
 }
 
+#confirmation {
+    background-color: #f8f9fa;
+    text-align: center;
+    margin: 0 auto;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    border-radius: 1rem;
+}
+
+.thank-you {
+    font-weight: bold;
+    
+
+}
+
+.order-id {
+    font-style: italic;
+    text-decoration: underline;
+}
+
+.order-number {
+    font-size: 1.5rem;
+}
+
 footer {
     display: inline-block;
     text-align: center;
