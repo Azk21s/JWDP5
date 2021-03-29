@@ -1,6 +1,10 @@
 html, body {
     height: 100%;
 }
+main {
+    width: 85%;
+    margin: 0 auto;
+}
 html {
 	scroll-behavior: smooth;
   }
@@ -13,6 +17,18 @@ html {
     background-color: rgb(196, 170, 230);
     transform: scale(1.08);
     filter: brightness(110%)    
+}
+
+form {
+    background-color: #f8f9fa;
+    border-radius: 1rem;
+    padding-bottom: 1rem;
+   
+}
+
+#confirm-btn {
+    padding-right: 1rem;
+    
 }
 
 footer {
