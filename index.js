@@ -1,23 +1,125 @@
-var request = new XMLHttpRequest();
-request.onreadystatechange = function() {
-    if (this.readyState == XMLHttpRequest.DONE && this.status == 200) {
-        var response = JSON.parse(this.responseText);
+(async function() {
+    await getTeddies()
+}) ()
 
-        console.log(response);
+function getTeddies() {
+    fetch("http://localhost:3000/api/teddies")
+        .then(function(httpBodyResponse) {
+            return httpBodyResponse.json()
+        })
+        .then(function(teddies) {
+            console.log(teddies)
 
-        let article = document.createElement("div");
+            for (teddy of teddies){
+                displayTeddy(teddy)
+            }
+        })
+        .catch(function(error) {
+            alert("serveur HS")
+        })       
+}
 
-        response.forEach(element => {
-            article.append(element.description);
-            article.appendChild(document.createElement("br"));
-        });
+function displayTeddy(teddy) {
+    const templateElt = document.getElementById("product")
+    const cloneElt = document.importNode(templateElt.content, true)
+    
+    cloneElt.getElementById("teddy_img").src = teddy.imageUrl
+    cloneElt.getElementById("teddy_name").textContent = teddy.name
+    cloneElt.getElementById("teddy_price").textContent = teddy.price 
+    cloneElt.getElementById("teddy_infos").textContent = teddy.description
+    cloneElt.getElementById("teddy_link").href = '/products.html?id=${teddy._id}'
 
-        const main = document.getElementById("articles").appendChild(article);
-    }
-};
-request.open("GET", "http://localhost:3000/api/teddies);
-request.send();
+    
 
+    document.getElementById("main").appendChild(cloneElt)
+}
+
+ 
+    
+    
+    
+    // // Ajouts des informations au html //
+
+// function addInformations (responseProduct, section) {
+//     let div = document.createElement("div");
+//     div.innerHTML = responseProduct.name;
+//     div.setAttribute("class", "row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3");
+
+//     let img = document.createElement(img);
+//     img.setAttribute("src", responseProduct.imageUrl);
+//     img.setAttribute("width", "100%");
+
+//     let describ = document.createElement("div");
+//     describ.innerHTML = responseProduct.description;
+
+//     let colors = document.createElement("p");
+//     colors.innerHTML = "Choisissez une couleur:" + responseProduct.colors;
+
+//     let price = document.createElement ("p");
+//     price.innerHTML = responseProduct.price + "£";
+
+//     let link = document.createElement("a");
+//     link.setAttribute("href", "produit.html?id=" + responseProduct._id);
+
+//     section[1].appendChild(div);
+//     div.appendChild(link)
+//     link.appendChild(img);
+//     div.appendChild(describ);
+//     div.appendChild(colors);
+//     div.appendChild(price);
+// }
+
+// // ajoute une div //
+
+// function addDiv(section) {
+//     let div2 = document.createElement("div");
+//     div.setAttribute("class", "col-md-5 mt-5mb-4 ml-4 mr-4");
+//     section[1].appendChild(div);
+// }
+
+// get("http://localhost:3000/api/teddies")
+//     .then(function (response) {
+//         const section = document.getElementsByClassName("row");
+
+//         for  (let i=0; i < response.length; i = i + 1) {
+//             addProduct(response[i], section);
+//         } 
+//         if (response.length % 2 === 1) {
+//             addDiv(section);  
+//     }
+//     })
+//     .catch(function (err) {
+//         console.log(err);
+//         if (err === 0) {
+//           alert("serveur hors-ligne"); 
+//         }
+//     });
+
+// const { response } = require("express");
+// const { get } = require("mongoose");
+
+// var request = new XMLHttpRequest();
+// request.onreadystatechange = function() {
+//     if (this.readyState == XMLHttpRequest.DONE && this.status == 200) {
+//         var response = JSON.parse(this.responseText);
+
+//         console.log(response);
+
+//         let article = document.createElement("div");
+
+//         response.forEach(element => {
+//             article.append(element.description);
+//             article.appendChild(document.createElement("br"));
+//         });
+
+//         const main = document.getElementById("article").appendChild(article);
+//     }
+// };
+// request.open("GET", "http://localhost:3000/api/teddies");
+// request.send();
+  
+
+// EXEMPLE
 
 // let card = document.querySelector(".card");
 // let product = document.querySelector("#product")
@@ -29,7 +131,7 @@ request.send();
 //       })
 //       .catch(function (err) {
 //         console.log(err);
-//         alert("serveur Hors service");
+//         alert("serveur HS");
 //       });
 
 // function showcard(response) {
@@ -61,3 +163,7 @@ request.send();
 //          console.log(pageProduit);
 //        }
 //      }    
+
+
+
+

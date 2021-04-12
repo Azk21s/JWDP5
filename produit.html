@@ -38,20 +38,38 @@
 
 <main>
 
-  <div class="container" id="product">
-    <img class="productimg" src="images/teddy_1.jpg" alt="photo du produit">
-    <br>
-    <h1 class="productname">Nom du produit</h1>
-    <div class="rate">
-      <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
-      <p class="productspec">stars avis / stock</p>
-  </div>
-    <p class="describ">Description du produit bla bla bla bla bla bla bla bla bla bla </p>
-    <h2>Choisissez une couleur :</h2>
-    <br>
-    <button type="button" class="btn btn-warning">Ajouter au panier</button>
-  </div>
-
+  <template id="product">
+    <div class="container">
+      <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+        <div class="col">
+          <div class="">
+            <a id="teddy_link" href="">
+            <!--Image-->
+            <div class="col-12 col-lg-6">
+              <div class="card bg-light mb-3">
+                <div class="card-body">
+                  <img class="img-fluid" id="teddy_img" src=""/>
+                  <h2 class="teddy_name" id="teddy_name">Nom</h2>
+                  <p class="teddy_informations" id="teddy_infos">Infos</p>
+                  <p class="teddy_price price" id="teddy_price">Price</p>
+                  <div class="form-group">
+                    <label for="colors">Color</label>
+                    <select class="custom-select" id="colors">
+                        <option selected>Select</option>
+                        <option value="1">Blue</option>
+                        <option value="2">Red</option>
+                        <option value="3">Green</option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+            </div>
+            </a>
+      </div>
+      </div>
+      </div>
+    </div>
+  </template>
   <br>
 
 </main>
