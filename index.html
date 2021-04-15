@@ -37,41 +37,40 @@
 
     <!-- Main -->
 
-<main class="main" id="main">
-  <h1 class="title">Accueil</h1>
+<main>
+  <h1 class="title">Nos produits :</h1>
 
     <!--Product-->
+<div class="container" id="displayProducts">
+  
 
-  <template id="product">
-    <div class="container">
-      <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
-        <div class="col">
-          <div class="">
+    <template id="product" >
+      
             <a id="teddy_link" href="">
             <!--Image-->
-            <div class="col-12 col-lg-6">
-              <div class="card bg-light mb-3">
+            
+              <div class="card col-md-auto">
                 <div class="card-body">
-                  <img class="img-fluid" id="teddy_img" src=""/>
+                  <img class="img-fluid img-responsive" id="teddy_img" src=""/>
                   <h2 class="teddy_name" id="teddy_name">Nom</h2>
                   <p class="teddy_informations" id="teddy_infos">Infos</p>
                   <p class="teddy_price price" id="teddy_price">Price</p>
                 </div>
               </div>
-            </div>
+
             </a>
-      </div>
-      </div>
-      </div>
-    </div>
-  </template>
+      
+    </template>
+    
+  
+</div>
 </main>
 
     <!-- Footer -->
     <div class="container-fluid">
       <div class="row">
           <footer class="mt-auto py-3 ">
-              <div class="container-fluid mentions">
+              <div class="container-fluid">
                   <a href="" class="text-muted">Mentions légales.</a>
                   <a href="" class="text-muted">Qui sommes-nous ?</a>
                   <a href="" class="text-muted">Contactez-nous !</a>
@@ -80,7 +79,7 @@
       </div>
   </div>      
       
-<script src="ajax.js"></script>
+
 <script src="index.js"></script>
 
 </body>

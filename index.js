@@ -21,17 +21,17 @@ function getTeddies() {
 
 function displayTeddy(teddy) {
     const templateElt = document.getElementById("product")
-    const cloneElt = document.importNode(templateElt.content, true)
+    const copyElt = document.importNode(templateElt.content, true)
     
-    cloneElt.getElementById("teddy_img").src = teddy.imageUrl
-    cloneElt.getElementById("teddy_name").textContent = teddy.name
-    cloneElt.getElementById("teddy_price").textContent = teddy.price 
-    cloneElt.getElementById("teddy_infos").textContent = teddy.description
-    cloneElt.getElementById("teddy_link").href = '/products.html?id=${teddy._id}'
+    copyElt.getElementById("teddy_img").src = teddy.imageUrl
+    copyElt.getElementById("teddy_name").textContent = teddy.name
+    copyElt.getElementById("teddy_price").textContent = (teddy.price/100).toFixed(2) + '€' 
+    copyElt.getElementById("teddy_infos").textContent = teddy.description
+    copyElt.getElementById("teddy_link").href = '/produit.html?id=${teddy._id}'
 
     
 
-    document.getElementById("main").appendChild(cloneElt)
+    document.getElementById("displayProducts").appendChild(copyElt)
 }
 
  
