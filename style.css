@@ -55,7 +55,7 @@ a:hover {
 
 /* -- Produit -- */
 
-#product {
+.dynamicSheet {
     background-color: #f8f9fa;
     text-align: center;
     margin: 0 auto;
