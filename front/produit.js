@@ -3,7 +3,7 @@
 	const productData = await getProductData(productId);
 	pageFeed(productData);
 
-	console.log(productData); // Ok
+	// console.log(productData); // Ok
 })();
 
 function urlSearchParams() {
@@ -12,7 +12,7 @@ function urlSearchParams() {
 // console.log(urlSearchParams())
 
 function getProductData(productId) {
-	return fetch(`http://localhost:3000/api/teddies?${productId}`)
+	return fetch(`http://localhost:3000/api/teddies/${productId}`)
 		.catch(error => {
 			console.log(error);
 		})
@@ -29,21 +29,22 @@ function pageFeed(product) {
 	document.getElementById("productInfo").textContent = product.description;
 	document.getElementById("productColors");
 
-	const colorsSelector = document.getElementById("productColors");
-
+	const mySelect = document.querySelector("select");
 	product.colors.forEach(color => {
-		const mySelect = document.getElementById("colorsTemplate");
-		const copyElt = document.importNode(mySelect.content, true);
+		// const copyElt = document.importNode(mySelect.content, true);
 
 		let newOption = document.createElement("option");
-		newOption.innerHTML = element;
+		newOption.textContent = color;
+		newOption.value = color;
+
 		mySelect.appendChild(newOption);
 	});
 }
 
 // Add event listeners on button
-//   document.getElementById('addTo').onclick = (event) => {
-//     event.preventDefault()
-//     Cart.addProduct(product)
-//     redirectToShoppingCart(product.name)
-//   }
+
+document.getElementById("addTo").addEventListener("click", event => {
+	event.preventDefault();
+	addProduct(product);
+	redirectToShoppingCart(product.name);
+});
