@@ -71,10 +71,31 @@ a:hover {
 
 /* -- Panier -- */
 
-form {
+.table {
 	background-color: #f8f9fa;
+}
+.cart {
+	width: 100%;
+	height: 100%;
 	border-radius: 1rem;
-	padding-bottom: 1rem;
+	margin: 0 auto;
+}
+.qtSelect {
+	width: 80%;
+}
+form {
+	width: 100%;
+	height: 100%;
+	background-color: #f8f9fa;
+	margin: 0 auto;
+	padding-left: 1rem;
+}
+
+.btn-cart {
+	margin-bottom: 0.1rem;
+	display: flex;
+	float: right;
+	background-color: lightblue;
 }
 
 /* -- Confirmation -- */

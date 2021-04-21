@@ -1,6 +1,6 @@
 (async () => {
 	const productId = urlSearchParams();
-	const productData = await getProductData(productId);
+	const productData = await getData(productId);
 	pageFeed(productData);
 
 	// console.log(productData); // Ok
@@ -11,7 +11,7 @@ function urlSearchParams() {
 }
 // console.log(urlSearchParams())
 
-function getProductData(productId) {
+function getData(productId) {
 	return fetch(`http://localhost:3000/api/teddies/${productId}`)
 		.catch(error => {
 			console.log(error);
@@ -19,7 +19,7 @@ function getProductData(productId) {
 		.then(httpBodyResponse => httpBodyResponse.json())
 		.then(productData => productData);
 }
-// console.log(getProductData(productId))
+// console.log(getData(productId))
 
 //Remplissage de la page avec les données du produit sélectionné
 function pageFeed(product) {
@@ -46,5 +46,9 @@ function pageFeed(product) {
 document.getElementById("addTo").addEventListener("click", event => {
 	event.preventDefault();
 	addProduct(product);
-	redirectToShoppingCart(product.name);
+	toBasket(product.name);
 });
+
+function toBasket(productName) {
+	window.location.href = `${window.location.origin}/panier.html?lastAddedProductName=${productName}`;
+}
