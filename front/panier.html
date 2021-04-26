@@ -52,15 +52,7 @@
 					</li>
 				</ul>
 
-				<div class="col-md-3 text-end">
-					<button
-						type="button"
-						class="btn btn-light"
-						onclick="window.location.href='panier.html'"
-					>
-						Panier
-					</button>
-				</div>
+				<div class="col-md-3 text-end"></div>
 			</header>
 		</div>
 
@@ -78,10 +70,10 @@
 					</thead>
 					<tbody id="cart-tablebody">
 						<tr>
-							<td class="">Norbert</td>
+							<td id="productName"></td>
 							<td class="">
 								<form class="flex" action="">
-									<select class="qtSelect" id="qt" name="q" id="quantity">
+									<select class="qtSelect" id="productQt" name="q">
 										<option value="1">1</option>
 										<option value="2">2</option>
 										<option value="3">3</option>
@@ -94,18 +86,16 @@
 									</select>
 								</form>
 							</td>
-							<td id="price">€</td>
+							<td id="productPrice">€</td>
 							<td id="productTotal">€</td>
 						</tr>
 
 						<tr>
 							<td></td>
 							<td class="text-right">Total</td>
-							<td class="text-center">€</td>
+							<td class="text-center" id="totalPrice">€</td>
 							<td>
-								<button class="btn-cart" id="confirm-command">
-									Vider le panier
-								</button>
+								<button class="btn-cart" id="clear-command">Vider le panier</button>
 							</td>
 						</tr>
 					</tbody>
@@ -197,5 +187,8 @@
 				</footer>
 			</div>
 		</div>
+
+		<script src="selectionProduit.js"></script>
+		<script src="panier.js"></script>
 	</body>
 </html>

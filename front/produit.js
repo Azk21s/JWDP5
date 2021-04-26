@@ -9,7 +9,7 @@
 function urlSearchParams() {
 	return new URL(window.location.href).searchParams.get("id");
 }
-// console.log(urlSearchParams())
+// console.log(urlSearchParams());
 
 function getData(productId) {
 	return fetch(`http://localhost:3000/api/teddies/${productId}`)
@@ -19,7 +19,6 @@ function getData(productId) {
 		.then(httpBodyResponse => httpBodyResponse.json())
 		.then(productData => productData);
 }
-// console.log(getData(productId))
 
 //Remplissage de la page avec les données du produit sélectionné
 function pageFeed(product) {
@@ -31,24 +30,40 @@ function pageFeed(product) {
 
 	const mySelect = document.querySelector("select");
 	product.colors.forEach(color => {
-		// const copyElt = document.importNode(mySelect.content, true);
-
 		let newOption = document.createElement("option");
 		newOption.textContent = color;
 		newOption.value = color;
 
 		mySelect.appendChild(newOption);
 	});
+
+	// Add event listeners on button
+
+	document.getElementById("addTo").addEventListener("click", event => {
+		event.preventDefault();
+		Basket.addProduct(product);
+		goToBasket(product.name);
+	});
 }
 
-// Add event listeners on button
+// // Add event listeners on button
 
-document.getElementById("addTo").addEventListener("click", event => {
-	event.preventDefault();
-	addProduct(product);
-	toBasket(product.name);
-});
+// document.getElementById("addTo").addEventListener("click", event => {
+// 	event.preventDefault();
+// 	addProduct(product);
+// 	toBasket(product.name);
+// });
 
-function toBasket(productName) {
-	window.location.href = `${window.location.origin}/panier.html?lastAddedProductName=${productName}`;
+// const product = {
+// 	productName: getData(productId).productName,
+// 	selectedProductId: getData(productId)._id,
+// 	quantity: 1,
+// 	price: (getData(productId).price / 100).toFixed(2)
+// };
+// console.log(product);
+
+// const addProduct = product;
+
+function goToBasket(productName) {
+	window.location.href = `${window.location.origin}/panier.htmllastAddedProductName=${productName}`;
 }
