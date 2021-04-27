@@ -10,10 +10,9 @@ class CartObject {
 
 	addProduct(productObject) {
 		let products = this.products;
+		const alreadyAdded = !!products[productObject._id];
 
-		const productAlreadyInCarte = !!products[productObject._id];
-
-		if (productAlreadyInCarte) {
+		if (alreadyAdded) {
 			// Augmente la quantité
 			products[productObject._id].quantity++;
 		} else {
@@ -27,12 +26,12 @@ class CartObject {
 		this.products = products;
 	}
 
-	getProductQuantity(productId) {
+	productQty(productId) {
 		const products = this.products;
 		return products[productId].quantity;
 	}
 
-	updateProductQuantity(productId, quantity) {
+	refreshProductQty(productId, quantity) {
 		const products = this.products;
 		products[productId].quantity = quantity;
 		console.log(products);

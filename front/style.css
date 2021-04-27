@@ -71,26 +71,26 @@ a:hover {
 
 /* -- Panier -- */
 
-.table {
-	background-color: #f8f9fa;
-}
 .cart {
 	width: 100%;
 	height: 100%;
 	border-radius: 1rem;
 	margin: 0 auto;
 }
+
 .qtSelect {
-	width: 80%;
+	width: 60%;
 }
 form {
 	width: 100%;
 	height: 100%;
-	background-color: #f8f9fa;
 	margin: 0 auto;
 	padding-left: 1rem;
 }
-
+.trashBtn {
+	border: none;
+	background-color: white;
+}
 .btn-cart {
 	margin-bottom: 0.1rem;
 	display: flex;
