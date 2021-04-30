@@ -1,25 +1,25 @@
 // panier -----------------------------------
 
 (() => {
-	const productsInShoppingCart = Basket.products;
-	if (productsInShoppingCart === null) return;
-	hydratePage(productsInShoppingCart);
+	const inTheBasket = Basket.products;
+	if (inTheBasket === null) return;
+	pageGenerator(inTheBasket);
 })();
 
-function hydratePage(productsInShoppingCart) {
-	// Calcul du prix tatol du panier
-	document.getElementById("totalPrice").textContent = Basket.getTotalPrice() + ".00€";
+function pageGenerator(inTheBasket) {
+	// Calcul du prix total du panier
+	document.getElementById("totalPrice").textContent = Basket.basketTotal() + ".00€";
 
 	// Boucle produits et affichage
-	const productList = Object.values(productsInShoppingCart);
+	const productList = Object.values(inTheBasket);
 	productList.forEach(product => {
-		displayProduct(product);
+		basketFeed(product);
 	});
 
-	// addEventListeners();
+	allFormEvents();
 }
 
-function displayProduct(product) {
+function basketFeed(product) {
 	const tableTemplate = document.getElementById("tableTemplate");
 	const copyElt = document.importNode(tableTemplate.content, true);
 
@@ -27,11 +27,11 @@ function displayProduct(product) {
 	copyElt.getElementById("productQt").selectedIndex = product.quantity - 1;
 	copyElt.getElementById("productPrice").textContent = (product.price / 100).toFixed(2) + "€";
 	copyElt.getElementById("productTotal").textContent =
-		(product.price * product.quantity) / 100 + ".00€";
+		((product.price * product.quantity) / 100).toFixed(2) + "€";
 
 	// Add events
 
-	// Vide tout le panier
+	// Vide tout le panier + le local storage
 	document.getElementById("clear-command").addEventListener("click", event => {
 		event.preventDefault();
 		localStorage.clear();
@@ -44,11 +44,12 @@ function displayProduct(product) {
 	// document.getElementById("trash").addEventListener("click",
 	// event => {
 	// 	event.preventDefault();
-	// 	storage.removeItem(product);
+	// 	delete inTheBasket
 	// 	location.reload;
 	// });
 	// --------------------------------------------------
 
+	// Permet de choisir la quantité pour un article
 	copyElt.getElementById("productQt").addEventListener("change", event => {
 		event.preventDefault();
 
@@ -61,121 +62,130 @@ function displayProduct(product) {
 		const newPrice = (product.price * Basket.productQty(product._id)) / (100).toFixed(2) + "€";
 		totalArticle.textContent = newPrice;
 
-		// Update all products total price
-		document.getElementById("totalPrice").textContent = Basket.getTotalPrice().toFixed(2) + "€";
+		// Calcul du prix total du panier
+		document.getElementById("totalPrice").textContent = Basket.basketTotal().toFixed(2) + "€";
 	});
 
 	// Affiche des templates
 	document.getElementById("tableBody").appendChild(copyElt);
 }
 
-function addEventListeners() {
-	// Purchase button
-	document.getElementById("confirmPurchase").addEventListener("click", event => {
+// ------------- Formulaire de commande ---------------------
+
+function allFormEvents() {
+	// Boutton "valider la commande"
+	document.getElementById("proceedCmd").addEventListener("click", event => {
 		event.preventDefault();
-		sendOrder();
+		proceedOrder();
 	});
 
-	// 	// Input validity
-	// 	watchValidity(document.getElementById("firstname"), e => e.target.value.length > 1);
-	// 	watchValidity(document.getElementById("lastname"), e => e.target.value.length > 1);
-	// 	watchValidity(document.getElementById("email"), e => {
-	// 		const emailRegex = /[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/;
-	// 		return emailRegex.test(e.target.value);
-	// 	});
-	// 	watchValidity(document.getElementById("adress"), e => e.target.value.length > 6);
-	// 	watchValidity(document.getElementById("zipcode"), e => {
-	// 		const zipcodeRegex = /[0-9]{5}(-[0-9]{4})?/;
-	// 		return zipcodeRegex.test(e.target.value);
-	// 	});
-	// 	watchValidity(document.getElementById("city"), e => e.target.value.length > 1);
-	// }
+	// Validation des différents inputs du formulaire de commande :
 
-	// function watchValidity(elt, condition) {
-	// 	elt.oninput = e => {
-	// 		if (condition(e)) {
-	// 			validInputElt(e.target);
-	// 		} else {
-	// 			neutralInputElt(e.target);
-	// 		}
-	// 	};
+	watchValidity(document.getElementById("fName"), event => event.target.value.length > 1); // Prénom
 
-	// 	elt.onblur = e => {
-	// 		if (!condition(e)) {
-	// 			invalidInputElt(e.target);
-	// 		}
-	// 	};
-	// }
+	watchValidity(document.getElementById("lName"), event => event.target.value.length > 1); // Nom
 
-	// function validInputElt(elt) {
-	// 	elt.style.border = "solid 1px green";
-	// 	elt.style.boxShadow = "#00800066 0px 0px 4px";
-	// }
+	watchValidity(document.getElementById("email"), event => {
+		const emailValidator = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
+		return emailValidator.test(event.target.value);
+	}); // Email
 
-	// function invalidInputElt(elt) {
-	// 	elt.style.border = "solid 1px red";
-	// 	elt.style.boxShadow = "rgba(128, 0, 0, 0.4) 0px 0px 4px";
-	// }
+	watchValidity(document.getElementById("adress"), event => event.target.value.length > 5); // Adresse postale
 
-	// function neutralInputElt(elt) {
-	// 	elt.style.border = "";
-	// 	elt.style.boxShadow = "";
-	// }
+	watchValidity(document.getElementById("city"), event => event.target.value.length > 1); // Ville
 
-	// function sendOrder() {
-	// 	const firstname = document.getElementById("firstname").value;
-	// 	const lastname = document.getElementById("lastname").value;
-	// 	const adress = document.getElementById("adress").value;
-	// 	const zipcode = document.getElementById("zipcode").value;
-	// 	const email = document.getElementById("email").value;
-	// 	const city = document.getElementById("city").value;
+	watchValidity(document.getElementById("country"), event => (event.target.value = "France")); // Pays
 
-	// 	const emailRegex = /[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/;
-	// 	const zipcodeRegex = /[0-9]{5}(-[0-9]{4})?/;
+	watchValidity(document.getElementById("zipCode"), event => {
+		const zipcodeValidator = /^(?:[0-8]\d|9[0-8])\d{3}$/;
+		return zipcodeValidator.test(event.target.value);
+	}); // Code postal
+}
 
-	// 	if (
-	// 		!(
-	// 			firstname.length > 1 &&
-	// 			lastname.length > 1 &&
-	// 			emailRegex.test(email) &&
-	// 			adress.length > 6 &&
-	// 			zipcodeRegex.test(zipcode) &&
-	// 			city.length > 1
-	// 		)
-	// 	) {
-	// 		alert("Veuillez remplir les champs correctements avant de procéder au paiement");
-	// 		return;
-	// 	}
+function watchValidity(elt, condition) {
+	elt.oninput = event => {
+		if (condition(event)) {
+			goodInput(event.target);
+		} else {
+			neutralInput(event.target);
+		}
+	};
 
-	// 	const products = Object.values(Basket.products).map(product => {
-	// 		return product._id;
-	// 	});
+	elt.onblur = event => {
+		if (!condition(event)) {
+			badInput(event.target);
+		}
+	};
+}
 
-	// 	const order = {
-	// 		contact: {
-	// 			firstName: firstname,
-	// 			lastName: lastname,
-	// 			address: adress + " " + zipcode,
-	// 			city: city,
-	// 			email: email
-	// 		},
-	// 		products: products
-	// 	};
+function goodInput(elt) {
+	elt.style.border = "solid 2px green";
+}
 
-	// 	const requestOptions = {
-	// 		method: "POST",
-	// 		body: JSON.stringify(order),
-	// 		headers: { "Content-Type": "application/json; charset=utf-8" }
-	// 	};
+function badInput(elt) {
+	elt.style.border = "solid 2px red";
+}
 
-	// 	fetch(`http://localhost:3000/api/teddies/order`, requestOptions)
-	// 		.then(response => response.json())
-	// 		.then(json => {
-	// 			console.log(json);
-	// 			localStorage.removeItem("shoppingCart");
-	// 			window.location.href = `${window.location.origin}/orderStatus.html?orderId=${json.orderId}`;
-	// 		})
-	// 		.catch(() => {
-	// 			alert(error);
-	// 		});
+function neutralInput(elt) {
+	elt.style.border = "";
+}
+
+function proceedOrder() {
+	const firstname = document.getElementById("fName").value;
+	const lastname = document.getElementById("lName").value;
+	const email = document.getElementById("email").value;
+	const adress = document.getElementById("adress").value;
+	const city = document.getElementById("city").value;
+	const country = document.getElementById("country").value;
+	const zipcode = document.getElementById("zipCode").value;
+
+	const emailValidator = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
+	const zipcodeValidator = /^(?:[0-8]\d|9[0-8])\d{3}$/;
+
+	if (
+		!(
+			firstname.length > 1 &&
+			lastname.length > 1 &&
+			emailValidator.test(email) &&
+			adress.length > 5 &&
+			zipcodeValidator.test(zipcode) &&
+			city.length > 1
+		)
+	) {
+		alert("Merci de remplir les champs correctement");
+		return;
+	}
+
+	const products = Object.values(Basket.products).map(product => {
+		return product._id;
+	});
+
+	const order = {
+		contact: {
+			firstName: firstname,
+			lastName: lastname,
+			address: adress + " " + zipcode,
+			city: city,
+			country: country,
+			email: email
+		},
+		products: products
+	};
+
+	const toPost = {
+		method: "POST",
+		body: JSON.stringify(order),
+		headers: { "Content-Type": "application/json; charset=utf-8" }
+	};
+
+	fetch(`http://localhost:3000/api/teddies/order`, toPost)
+		.then(response => response.json())
+		.then(json => {
+			console.log(json);
+			localStorage.removeItem("basketKey");
+			window.location.href = `confirmation.html?orderId=${json.orderId}`;
+		})
+		.catch(() => {
+			alert(error);
+		});
 }

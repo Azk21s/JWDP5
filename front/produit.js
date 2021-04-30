@@ -42,7 +42,7 @@ function pageFeed(product) {
 	document.getElementById("addTo").addEventListener("click", event => {
 		event.preventDefault();
 		// ajout du produit dans le panier
-		Basket.addProduct(product);
+		Basket.addTeddie(product);
 		//Redirection vers le panier ou l'accueil suivant le choix de l'utilisateur
 		goToBasket(product.name);
 	});

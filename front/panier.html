@@ -134,19 +134,11 @@
 					
 				</div>
 				<div class="col-md-4 position-relative">
-					<label for="validationTooltipUsername" class="form-label">E-mail</label>
+					<label for="email" class="form-label">E-mail</label>
 					<div class="input-group has-validation">
 						<span class="input-group-text" id="email">@</span>
-						<input
-							type="email"
-							class="form-control"
-							id="validationTooltipUsername"
-							aria-describedby="validationTooltipUsernamePrepend"
-							required
-						/>
-						<div class="invalid-tooltip"></div>
-							Saisissez une adresse email conforme.
-						</div>
+						<input type="text" name="adress" id="adress" class="input" required />
+						
 					</div>
 				</div>
 				<div class="col-md-6 position-relative">
@@ -156,22 +148,22 @@
 				</div>
 				<div class="col-md-3 position-relative">
 					<label for="city" class="form-label">Ville</label>
-					<input type="text" class="form-control" id="validationTooltip05" required />
-					<div class="invalid-tooltip">Veuillez saisir votre ville.</div>
+					<input type="text" class="form-control" id="city" required />
+					
 				</div>
 				<div class="col-md-3 position-relative">
-					<label for="validationTooltip05" class="form-label">Pays</label>
-					<select class="form-select" id="city" required>
+					<label for="country" class="form-label">Pays</label>
+					<select class="form-select" id="country" required>
 						<option selected disabled value="">Choose...</option>
 						<option>France</option>
 					</select>
-					<div class="invalid-tooltip">Veuillez choisir votre pays.</div>
+					
 				</div>
 
 				<div class="col-md-3 position-relative">
-					<label for="validationTooltip06" class="form-label">Code postal</label>
-					<input type="number" class="form-control" id="validationTooltip05" required />
-					<div class="invalid-tooltip">Veuillez saisir une code postal valide.</div>
+					<label for="zipCode" class="form-label">Code postal</label>
+					<input type="number" class="form-control" id="zipCode" required />
+					
 				</div>
 				<div class="col-12 text-right">
 					<a class="btn btn-success" id="proceedCmd"> Valider la commande </a>

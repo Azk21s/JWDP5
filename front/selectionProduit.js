@@ -1,25 +1,25 @@
-class CartObject {
+class ItemKeys {
 	// ajout de l'objet dans le local storage
 	get products() {
-		return JSON.parse(localStorage.getItem("shoppingCart") || "{}");
+		return JSON.parse(localStorage.getItem("basketKey") || "{}");
 	}
 	// conversion en format JSON de la clé produit
 	set products(products) {
-		localStorage.setItem("shoppingCart", JSON.stringify(products));
+		localStorage.setItem("basketKey", JSON.stringify(products));
 	}
 
-	addProduct(productObject) {
+	addTeddie(teddieObject) {
 		let products = this.products;
-		const alreadyAdded = !!products[productObject._id];
+		const alreadyAdded = !!products[teddieObject._id];
 
 		if (alreadyAdded) {
 			// Augmente la quantité
-			products[productObject._id].quantity++;
+			products[teddieObject._id].quantity++;
 		} else {
 			// Ajoute le produit
-			products[productObject._id] = {
+			products[teddieObject._id] = {
 				quantity: 1,
-				...productObject
+				...teddieObject
 			};
 		}
 
@@ -38,8 +38,9 @@ class CartObject {
 		this.products = products;
 	}
 
-	getTotalPrice() {
+	basketTotal() {
 		const products = this.products;
+
 		const totalPrice = Object.values(products).reduce((acc, curr) => {
 			return acc + (curr.price * curr.quantity) / 100;
 		}, 0);
@@ -47,4 +48,4 @@ class CartObject {
 	}
 }
 
-const Basket = new CartObject();
+const Basket = new ItemKeys();
