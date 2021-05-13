@@ -1,4 +1,4 @@
-class ItemKeys {
+class productSelection {
 	// ajout de l'objet dans le local storage
 	get products() {
 		return JSON.parse(localStorage.getItem("basketKey") || "{}");
@@ -47,4 +47,4 @@ class ItemKeys {
 	}
 }
 
-const Basket = new ItemKeys();
+const Basket = new productSelection();
