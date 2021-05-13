@@ -31,11 +31,25 @@
 
 		<div class="container">
 			<header
-				class="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-3 mb-4 border-bottom"
+				class="
+					d-flex
+					flex-wrap
+					align-items-center
+					justify-content-center justify-content-md-between
+					py-3
+					mb-4
+					border-bottom
+				"
 			>
 				<a
 					href="/"
-					class="d-flex align-items-center col-md-3 mb-2 mb-md-0 text-dark text-decoration-none"
+					class="
+						d-flex
+						align-items-center
+						col-md-3
+						mb-2 mb-md-0
+						text-dark text-decoration-none
+					"
 				>
 					<svg class="bi me-2" width="40" height="32">
 						<use xlink:href="#bootstrap" />
@@ -45,7 +59,13 @@
 				<ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
 					<li>
 						<a
-							class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-dark text-decoration-none"
+							class="
+								d-flex
+								align-items-center
+								mb-3 mb-md-0
+								me-md-auto
+								text-dark text-decoration-none
+							"
 							href="index.html"
 							><img src="images/logo.png.webp" alt="logo" height="100"
 						/></a>
@@ -66,27 +86,35 @@
 
 		<main>
 			<!-- CONFIRMATION -->
-
+			<h1 class="text-center"><b>Récapitulatif de votre commande :</b></h1>
 			<div class="container" id="confirmation">
-				<p class="thank-you">
+				<h2 class="thank-you">
 					Merci pour votre commande, cette dernière a bien été prise en compte.
-				</p>
-				<p class="order-id">Identifiant de votre commande :</p>
-				<p class="order-number">3dfff930-9093-11eb-9327-69857b880d70</p>
+				</h2>
+				<h3>Identifiant de votre commande :</h3>
+				<p id="orderId"></p>
+				<h3>Montant total :</h3>
+				<p id="finalPrice"></p>
 				<br />
-				<button type="button" class="btn btn-primary">Retournez à l'accueil</button>
+				<a href="index.html" class="btn btn-primary" id="homeBtn">Retournez à l'accueil</a>
 			</div>
 			<br />
 		</main>
 
-		<div class="footer">
-			<footer class="footer mt-auto py-3">
-				<div class="container-fluid mentions">
-					<a href="" class="text-muted">Mentions légales.</a>
-					<a href="" class="text-muted">Qui sommes-nous ?</a>
-					<a href="" class="text-muted">Contactez-nous !</a>
-				</div>
-			</footer>
+		<!-- Footer -->
+
+		<div class="container-fluid fixed-bottom">
+			<div class="row">
+				<footer class="mt-auto py-3">
+					<div class="container-fluid">
+						<a href="" class="text-muted">Mentions légales.</a>
+						<a href="" class="text-muted">Qui sommes-nous ?</a>
+						<a href="" class="text-muted">Contactez-nous !</a>
+					</div>
+				</footer>
+			</div>
 		</div>
+		<script src="selectionProduit.js"></script>
+		<script src="confirmation.js"></script>
 	</body>
 </html>

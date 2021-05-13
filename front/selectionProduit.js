@@ -8,18 +8,18 @@ class ItemKeys {
 		localStorage.setItem("basketKey", JSON.stringify(products));
 	}
 
-	addTeddie(teddieObject) {
+	addTeddy(teddyObject) {
 		let products = this.products;
-		const alreadyAdded = !!products[teddieObject._id];
+		const alreadyAdded = !!products[teddyObject._id];
 
 		if (alreadyAdded) {
 			// Augmente la quantité
-			products[teddieObject._id].quantity++;
+			products[teddyObject._id].quantity++;
 		} else {
 			// Ajoute le produit
-			products[teddieObject._id] = {
+			products[teddyObject._id] = {
 				quantity: 1,
-				...teddieObject
+				...teddyObject
 			};
 		}
 
@@ -34,7 +34,6 @@ class ItemKeys {
 	refreshProductQty(productId, quantity) {
 		const products = this.products;
 		products[productId].quantity = quantity;
-		console.log(products);
 		this.products = products;
 	}
 

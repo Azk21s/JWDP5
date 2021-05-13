@@ -55,7 +55,7 @@
 				<div class="col-md-3 text-end"></div>
 			</header>
 		</div>
-
+<h1 class="text-center">Votre panier</h1>
 		<main>
 			<!-- Contenu du panier -->
 			<section class="cart" id="tableSection">
@@ -64,7 +64,6 @@
 						<tr>
 							<th>Article</th>
 							<th>Quantité</th>
-							<th></th>
 							<th>Prix unitaire</th>
 							<th>Total</th>
 						</tr>
@@ -89,14 +88,12 @@
 										</select>
 									</form>
 								</td>
-								<td><button class="trashBtn"><i id="trash" class="far fa-trash-alt"></i></button></td>
 								<td id="productPrice">€</td>
 								<td id="productTotal">€</td>
 							</tr>
 						</template>
 					</tbody>
 					<tfoot id="tableFooter">
-						<td></td>
 						<td></td>
 						<th>Total de votre panier :</th>
 						<th class="text-left" id="totalPrice">€</t>h
@@ -108,19 +105,23 @@
 					</tfoot>
 				</table>
 			</section>
+
 			<!-- Espace paiement -->
+
 			<br />
+			<h2>Veuillez remplir ces informations avant de valider votre commande :</h2>
+			<br>
 			<form class="row mx-auto bg-light needs-validation" novalidate>
+				
+				<br>
 				<div class="col-md-4 position-relative">
 					<label for="fName" class="form-label">Prénom</label>
 					<input
 						type="text"
 						class="form-control"
 						id="fName"
-						value=""
 						required
-					/>
-					
+					/>	
 				</div>
 				<div class="col-md-4 position-relative">
 					<label for="lName" class="form-label">Nom</label>
@@ -128,23 +129,19 @@
 						type="text"
 						class="form-control"
 						id="lName"
-						value=""
 						required
 					/>
-					
 				</div>
 				<div class="col-md-4 position-relative">
 					<label for="email" class="form-label">E-mail</label>
-					<div class="input-group has-validation">
-						<span class="input-group-text" id="email">@</span>
-						<input type="text" name="adress" id="adress" class="input" required />
-						
+					<div class="input-group">
+						<span class="input-group-text">@</span>
+						<input type="text" name="email" id="email" class="input" required />
 					</div>
 				</div>
 				<div class="col-md-6 position-relative">
-					<label for="adress" class="form-label">Adresse postale</label>
-					<input type="text" class="form-control" id="adress" required />
-					
+					<label for="address" class="form-label">Adresse postale</label>
+					<input type="text" class="form-control" id="address" required />
 				</div>
 				<div class="col-md-3 position-relative">
 					<label for="city" class="form-label">Ville</label>
@@ -153,17 +150,12 @@
 				</div>
 				<div class="col-md-3 position-relative">
 					<label for="country" class="form-label">Pays</label>
-					<select class="form-select" id="country" required>
-						<option selected disabled value="">Choose...</option>
-						<option>France</option>
-					</select>
-					
+					<input type="text" class="form-control" id="country" required />
 				</div>
 
 				<div class="col-md-3 position-relative">
 					<label for="zipCode" class="form-label">Code postal</label>
-					<input type="number" class="form-control" id="zipCode" required />
-					
+					<input type="number" class="form-control" id="zipCode" required />	
 				</div>
 				<div class="col-12 text-right">
 					<a class="btn btn-success" id="proceedCmd"> Valider la commande </a>

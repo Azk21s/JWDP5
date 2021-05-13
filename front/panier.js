@@ -7,13 +7,13 @@
 })();
 
 function pageGenerator(inTheBasket) {
-	// Calcul du prix total du panier
-	document.getElementById("totalPrice").textContent = Basket.basketTotal() + ".00€";
-
 	// Boucle produits et affichage
 	const productList = Object.values(inTheBasket);
 	productList.forEach(product => {
 		basketFeed(product);
+
+		// Calcul du prix total du panier
+		document.getElementById("totalPrice").textContent = Basket.basketTotal().toFixed(2) + "€";
 	});
 
 	allFormEvents();
@@ -37,17 +37,6 @@ function basketFeed(product) {
 		localStorage.clear();
 		location.reload();
 	});
-	// -------------------------------------------------
-
-	// Supprime le produit du panier ---- NE FONCTIONNE PAS
-	// -------------------------------------------------
-	// document.getElementById("trash").addEventListener("click",
-	// event => {
-	// 	event.preventDefault();
-	// 	delete inTheBasket
-	// 	location.reload;
-	// });
-	// --------------------------------------------------
 
 	// Permet de choisir la quantité pour un article
 	copyElt.getElementById("productQt").addEventListener("change", event => {
@@ -55,14 +44,13 @@ function basketFeed(product) {
 
 		Basket.refreshProductQty(product._id, event.target.selectedIndex + 1);
 
-		// Calcul du prix total pour un produit suivant la quantité choisie
-		const totalArticle = event.target.parentElement.parentElement.parentElement.querySelector(
-			"#productTotal"
-		);
+		// Met à jour le prix d'un produit suivant la quantité choisie
+		const totalArticle =
+			event.target.parentElement.parentElement.parentElement.querySelector("#productTotal");
 		const newPrice = (product.price * Basket.productQty(product._id)) / (100).toFixed(2) + "€";
 		totalArticle.textContent = newPrice;
 
-		// Calcul du prix total du panier
+		// Calcul du prix total du panier suivant les quantité de chaque article (mise à jour)
 		document.getElementById("totalPrice").textContent = Basket.basketTotal().toFixed(2) + "€";
 	});
 
@@ -80,34 +68,29 @@ function allFormEvents() {
 	});
 
 	// Validation des différents inputs du formulaire de commande :
-
-	watchValidity(document.getElementById("fName"), event => event.target.value.length > 1); // Prénom
-
-	watchValidity(document.getElementById("lName"), event => event.target.value.length > 1); // Nom
-
-	watchValidity(document.getElementById("email"), event => {
-		const emailValidator = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
+	validityCheck(document.getElementById("fName"), event => event.target.value.length > 1); // Prénom
+	validityCheck(document.getElementById("lName"), event => event.target.value.length > 1); // Nom
+	validityCheck(document.getElementById("email"), event => {
+		const emailValidator =
+			/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
 		return emailValidator.test(event.target.value);
 	}); // Email
-
-	watchValidity(document.getElementById("adress"), event => event.target.value.length > 5); // Adresse postale
-
-	watchValidity(document.getElementById("city"), event => event.target.value.length > 1); // Ville
-
-	watchValidity(document.getElementById("country"), event => (event.target.value = "France")); // Pays
-
-	watchValidity(document.getElementById("zipCode"), event => {
-		const zipcodeValidator = /^(?:[0-8]\d|9[0-8])\d{3}$/;
+	validityCheck(document.getElementById("address"), event => event.target.value.length > 3); // Adresse postale
+	validityCheck(document.getElementById("city"), event => event.target.value.length > 1); // Ville
+	validityCheck(document.getElementById("country"), event => event.target.value.length > 1); // Pays
+	validityCheck(document.getElementById("zipCode"), event => {
+		const zipcodeValidator = /[0-9]{5}(-[0-9]{4})?/;
 		return zipcodeValidator.test(event.target.value);
 	}); // Code postal
 }
+// ----------------------------
 
-function watchValidity(elt, condition) {
+function validityCheck(elt, condition) {
 	elt.oninput = event => {
 		if (condition(event)) {
 			goodInput(event.target);
 		} else {
-			neutralInput(event.target);
+			emptyInput(event.target);
 		}
 	};
 
@@ -126,7 +109,7 @@ function badInput(elt) {
 	elt.style.border = "solid 2px red";
 }
 
-function neutralInput(elt) {
+function emptyInput(elt) {
 	elt.style.border = "";
 }
 
@@ -134,25 +117,33 @@ function proceedOrder() {
 	const firstname = document.getElementById("fName").value;
 	const lastname = document.getElementById("lName").value;
 	const email = document.getElementById("email").value;
-	const adress = document.getElementById("adress").value;
+	const address = document.getElementById("address").value;
 	const city = document.getElementById("city").value;
 	const country = document.getElementById("country").value;
 	const zipcode = document.getElementById("zipCode").value;
 
 	const emailValidator = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
-	const zipcodeValidator = /^(?:[0-8]\d|9[0-8])\d{3}$/;
+	const zipcodeValidator = /[0-9]{5}(-[0-9]{4})?/;
 
+	console.log(firstname.length);
+	console.log(lastname.length);
+	console.log(emailValidator.test(email));
+	console.log(address.length);
+	console.log(city.length);
+	console.log(country.length);
+	console.log(zipcodeValidator.test(zipcode));
 	if (
 		!(
 			firstname.length > 1 &&
 			lastname.length > 1 &&
-			emailValidator.test(email) &&
-			adress.length > 5 &&
+			// emailValidator.test(email) &&
+			address.length > 5 &&
 			zipcodeValidator.test(zipcode) &&
-			city.length > 1
+			city.length > 1 &&
+			country.length > 1
 		)
 	) {
-		alert("Merci de remplir les champs correctement");
+		alert("Merci de remplir tous les champs correctement");
 		return;
 	}
 
@@ -164,26 +155,26 @@ function proceedOrder() {
 		contact: {
 			firstName: firstname,
 			lastName: lastname,
-			address: adress + " " + zipcode,
+			address: address,
 			city: city,
-			country: country,
 			email: email
 		},
 		products: products
 	};
-
+	console.log(order);
 	const toPost = {
 		method: "POST",
 		body: JSON.stringify(order),
-		headers: { "Content-Type": "application/json; charset=utf-8" }
+		headers: { "Content-Type": "application/json" }
 	};
+	console.log(toPost);
 
 	fetch(`http://localhost:3000/api/teddies/order`, toPost)
 		.then(response => response.json())
 		.then(json => {
-			console.log(json);
-			localStorage.removeItem("basketKey");
 			window.location.href = `confirmation.html?orderId=${json.orderId}`;
+			console.log(json);
+			// localStorage.removeItem("basketKey");
 		})
 		.catch(() => {
 			alert(error);
