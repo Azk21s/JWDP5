@@ -125,6 +125,7 @@ function proceedOrder() {
 	const emailValidator = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
 	const zipcodeValidator = /[0-9]{5}(-[0-9]{4})?/;
 
+	// tests des validateurs
 	console.log(firstname.length);
 	console.log(lastname.length);
 	console.log(emailValidator.test(email));
@@ -132,11 +133,13 @@ function proceedOrder() {
 	console.log(city.length);
 	console.log(country.length);
 	console.log(zipcodeValidator.test(zipcode));
+	//
+
 	if (
 		!(
 			firstname.length > 1 &&
 			lastname.length > 1 &&
-			// emailValidator.test(email) &&
+			emailValidator.test(email) &&
 			address.length > 5 &&
 			zipcodeValidator.test(zipcode) &&
 			city.length > 1 &&
@@ -174,7 +177,6 @@ function proceedOrder() {
 		.then(json => {
 			window.location.href = `confirmation.html?orderId=${json.orderId}`;
 			console.log(json);
-			// localStorage.removeItem("basketKey");
 		})
 		.catch(() => {
 			alert(error);

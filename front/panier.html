@@ -4,7 +4,7 @@
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
 		<link rel="shortcut icon" type="image/png" href="images/favicon.png" />
-		
+
 		<title>Panier - Orinoco</title>
 		<script src="https://kit.fontawesome.com/f7f6384f69.js" crossorigin="anonymous"></script>
 		<link
@@ -24,18 +24,32 @@
 			href="https://fonts.googleapis.com/css2?family=Indie+Flower&display=swap"
 			rel="stylesheet"
 		/>
-		<link rel="stylesheet" href="style.css" : />
+		<link rel="stylesheet" href="style.css" />
 	</head>
 	<body>
 		<!-- Header -->
 
 		<div class="container">
 			<header
-				class="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-3 mb-4 border-bottom"
+				class="
+					d-flex
+					flex-wrap
+					align-items-center
+					justify-content-center justify-content-md-between
+					py-3
+					mb-4
+					border-bottom
+				"
 			>
 				<a
 					href="/"
-					class="d-flex align-items-center col-md-3 mb-2 mb-md-0 text-dark text-decoration-none"
+					class="
+						d-flex
+						align-items-center
+						col-md-3
+						mb-2 mb-md-0
+						text-dark text-decoration-none
+					"
 				>
 					<svg class="bi me-2" width="40" height="32">
 						<use xlink:href="#bootstrap" />
@@ -45,7 +59,13 @@
 				<ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
 					<li>
 						<a
-							class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-dark text-decoration-none"
+							class="
+								d-flex
+								align-items-center
+								mb-3 mb-md-0
+								me-md-auto
+								text-dark text-decoration-none
+							"
 							href="index.html"
 							><img src="images/logo.png.webp" alt="logo" height="100"
 						/></a>
@@ -55,7 +75,7 @@
 				<div class="col-md-3 text-end"></div>
 			</header>
 		</div>
-<h1 class="text-center">Votre panier</h1>
+		<h1 class="text-center">Votre panier</h1>
 		<main>
 			<!-- Contenu du panier -->
 			<section class="cart" id="tableSection">
@@ -96,7 +116,7 @@
 					<tfoot id="tableFooter">
 						<td></td>
 						<th>Total de votre panier :</th>
-						<th class="text-left" id="totalPrice">€</t>h
+						<th class="text-left" id="totalPrice">€</th>
 						<td>
 							<button class="btn-cart text-right" id="clear-command">
 								Vider le panier
@@ -110,27 +130,16 @@
 
 			<br />
 			<h2>Veuillez remplir ces informations avant de valider votre commande :</h2>
-			<br>
+			<br />
 			<form class="row mx-auto bg-light needs-validation" novalidate>
-				
-				<br>
+				<br />
 				<div class="col-md-4 position-relative">
 					<label for="fName" class="form-label">Prénom</label>
-					<input
-						type="text"
-						class="form-control"
-						id="fName"
-						required
-					/>	
+					<input type="text" class="form-control" id="fName" required />
 				</div>
 				<div class="col-md-4 position-relative">
 					<label for="lName" class="form-label">Nom</label>
-					<input
-						type="text"
-						class="form-control"
-						id="lName"
-						required
-					/>
+					<input type="text" class="form-control" id="lName" required />
 				</div>
 				<div class="col-md-4 position-relative">
 					<label for="email" class="form-label">E-mail</label>
@@ -146,7 +155,6 @@
 				<div class="col-md-3 position-relative">
 					<label for="city" class="form-label">Ville</label>
 					<input type="text" class="form-control" id="city" required />
-					
 				</div>
 				<div class="col-md-3 position-relative">
 					<label for="country" class="form-label">Pays</label>
@@ -155,7 +163,7 @@
 
 				<div class="col-md-3 position-relative">
 					<label for="zipCode" class="form-label">Code postal</label>
-					<input type="number" class="form-control" id="zipCode" required />	
+					<input type="number" class="form-control" id="zipCode" required />
 				</div>
 				<div class="col-12 text-right">
 					<a class="btn btn-success" id="proceedCmd"> Valider la commande </a>

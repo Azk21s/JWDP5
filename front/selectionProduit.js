@@ -3,7 +3,7 @@ class productSelection {
 	get products() {
 		return JSON.parse(localStorage.getItem("basketKey") || "{}");
 	}
-	// conversion en format JSON de la clé produit
+	// conversion au format JSON de la clé produit
 	set products(products) {
 		localStorage.setItem("basketKey", JSON.stringify(products));
 	}

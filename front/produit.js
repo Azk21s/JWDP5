@@ -2,22 +2,18 @@
 	const productId = urlSearchParams();
 	const productData = await getData(productId);
 	pageFeed(productData);
-
-	// console.log(productData); // Ok
 })();
 
 function urlSearchParams() {
 	return new URL(window.location.href).searchParams.get("id");
 }
-// console.log(urlSearchParams());
 
 function getData(productId) {
 	return fetch(`http://localhost:3000/api/teddies/${productId}`)
 		.catch(error => {
 			console.log(error);
 		})
-		.then(httpBodyResponse => httpBodyResponse.json())
-		.then(productData => productData);
+		.then(httpBodyResponse => httpBodyResponse.json());
 }
 
 //Remplissage de la page avec les données du produit sélectionné

@@ -32,6 +32,9 @@ a:hover {
 }
 
 /* -- Accueil -- */
+.title {
+	margin-left: 23%;
+}
 #displayProducts {
 	display: grid;
 	grid-template-columns: repeat(2, 1fr);

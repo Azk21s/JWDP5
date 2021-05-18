@@ -8,14 +8,13 @@ function getTeddies() {
 			return httpBodyResponse.json();
 		})
 		.then(function (teddies) {
-			console.log(teddies);
-
 			for (teddy of teddies) {
 				displayTeddy(teddy);
 			}
 		})
 		.catch(function (error) {
 			alert("serveur HS");
+			console.log(error);
 		});
 }
 
